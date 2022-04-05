@@ -14,6 +14,6 @@ interface UserDao {
     suspend fun addUser(user:User)
 
     @Query("SELECT * FROM user_table ORDER BY id ASC")
-    suspend fun readAllUsers():LiveData<List<User>>
+    fun readAllUsers():LiveData<List<User>>
 
 }
