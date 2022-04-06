@@ -23,7 +23,7 @@ class ListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentListBinding.inflate(inflater,container,false)
 
@@ -32,12 +32,13 @@ class ListFragment : Fragment() {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
 
+
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager =  LinearLayoutManager(requireContext())
 
-        mainActivityViewModel.readAllData.observe(viewLifecycleOwner, Observer {
+        mainActivityViewModel.readAllData.observe(viewLifecycleOwner) {
             adapter.setData(it)
-        })
+        }
 
         return binding.root
     }
