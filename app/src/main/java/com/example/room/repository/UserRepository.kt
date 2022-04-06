@@ -6,11 +6,11 @@ import com.example.room.database.models.User
 
 class UserRepository(private val userDao: UserDao) {
 
+    val readAllData : LiveData<List<User>> = userDao.readAllUsers()
+
     suspend fun addUser(user: User){
         userDao.addUser(user)
     }
 
-    suspend fun getAllUsers(): LiveData<List<User>>{
-        return userDao.readAllUsers()
-    }
+
 }
