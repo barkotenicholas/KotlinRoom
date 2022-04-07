@@ -9,14 +9,25 @@ import com.example.room.databinding.CustomRowBinding
 class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHodler>() {
 
     private var userList = emptyList<User>()
+    var onItemClick: ((User) -> Unit)? = null
 
-    class ViewHodler(private val itemViewa: CustomRowBinding) :
-        RecyclerView.ViewHolder(itemViewa.root) {
+    inner class ViewHodler(private val itemViewa: CustomRowBinding) :RecyclerView.ViewHolder(itemViewa.root) {
+
+
+
         fun bind(user: User) {
+
             itemViewa.textView2.text = user.id.toString()
             itemViewa.fname.text = user.firstName
             itemViewa.lname.text = user.lastName
             itemViewa.ageShow.text = user.age.toString()
+
+            itemViewa.row.setOnClickListener{
+
+                onItemClick?.invoke(user)
+
+            }
+
         }
     }
 
@@ -36,4 +47,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.ViewHodler>() {
         this.userList = user
         notifyDataSetChanged()
     }
+
+
+
 }

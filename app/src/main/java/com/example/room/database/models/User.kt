@@ -1,9 +1,11 @@
 package com.example.room.database.models
 
+import android.os.*
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "user_table")
 data class User(
     @PrimaryKey(autoGenerate = true)
@@ -11,5 +13,4 @@ data class User(
     val firstName:String,
     val lastName:String,
     val age :Int
-    ) {
-}
+    ): Parcelable

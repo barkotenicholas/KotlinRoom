@@ -40,6 +40,12 @@ class ListFragment : Fragment() {
             adapter.setData(it)
         }
 
+
+        adapter.onItemClick = {
+            val action = ListFragmentDirections.actionListFragmentToUpdate2(it)
+            findNavController().navigate(action)
+        }
+
         return binding.root
     }
 
