@@ -27,4 +27,10 @@ class MainActivityViewModel (application: Application): AndroidViewModel(applica
         }
     }
 
+    fun updateUser(user:User){
+        viewModelScope.launch(Dispatchers.IO) {
+            repo.updateUser(user)
+        }
+    }
+
 }
