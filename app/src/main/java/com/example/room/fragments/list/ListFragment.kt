@@ -1,10 +1,10 @@
 package com.example.room.fragments.list
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,8 +46,40 @@ class ListFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu, menu )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete){
+            deleteAllUsers()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllUsers() {val builder  = AlertDialog.Builder(requireContext())
+        builder.setTitle("Delete All")
+        builder.setMessage("Are you sure you want to delete All users")
+        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            mainActivityViewModel.deleteAll()
+            val text = "All User successfully deleted "
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
+        }
+        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            val text = "Deletion Operation cancelled"
+            val duration = Toast.LENGTH_SHORT
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
+        }
+
+        builder.show()
+
+    }
 
 }
